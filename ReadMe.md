@@ -18,11 +18,11 @@ Click **Settings** -> Click **Security** -> Click **Add SSH Key** <br/>
 Select an existing project OR Create a **New Project** -> Click **Create** -> Click **Droplets** 
 
 4. Create a regular user account: In **wsl** <br/>
-i.  `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
-ii. `useradd -ms /bin/bash USER_NAME` <br/>
-iii.`usermod -aG sudo USER_NAME` <br/>
-iv. `passwd USER_NAME` <br/>
-v.  `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
+i.      `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
+ii.     `useradd -ms /bin/bash USER_NAME` <br/>
+iii.    `usermod -aG sudo USER_NAME` <br/>
+iv.     `passwd USER_NAME` <br/>
+v.      `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
 
 5. Login as regular user: </br>
 `ssh -i ~/.ssh/FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` <br/>
