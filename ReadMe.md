@@ -19,7 +19,7 @@ Select an existing project OR Create a **New Project** <br/>
 -> Click **Create** <br/>
 -> Click **Droplets** <br/>
 
-4. Create a regular user account: In **wsl** <br/>
+4. Create a regular user account in **wsl**: <br/>
 -> `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
 -> `useradd -ms /bin/bash USER_NAME` <br/>
 -> `usermod -aG sudo USER_NAME` <br/>
