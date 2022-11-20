@@ -1,16 +1,16 @@
 # ACIT 2420 - Week 11 Lab 
 
 ## Team Members: 
-* **Amanda Chang** A01294905 
+* **Amanda Chang**
 * **Jose Bangate** 
 
 ---
 
-## Steps to Create a Remote Server 
+## Steps to Create a Remote Server in DigitalOcean 
 1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
 
 2. Add a new SSH key in **DigitalOcean**: <br/>
-Click **Settings** -> Click **Security** -> Click **Add SSH Key** <br/>
+**Settings** -> **Security** -> **Add SSH Key** <br/>
 -> Copy and paste the public key from the .pub file in the .ssh folder into **SSH key content** box <br/>
 -> input a SSH key name into **Name** box -> Click **Add SSH Key**  
 
