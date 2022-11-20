@@ -34,8 +34,7 @@ The *backup.conf* configuration file includes two variables:
 - an IP address of the backup-server 
 
 **Example**
-[<img src="https://github.com/achang140/2420_week11_Lab/blob/main/images-directory/1wsl_sftp.jpg" width="500" height="500"/>](./images-directory/backup-conf.jpg)
-<!-- ![backup-conf](./images-directory/backup-conf.jpg) -->
+![backup-conf](./images-directory/backup-conf.jpg)
 
 #### backup-script 
 The *backup-script* source the *backup.conf* configuration file and use `rsync` command to backup a specified directory from server-one to the backup-server on every Friday at 01:00. 
