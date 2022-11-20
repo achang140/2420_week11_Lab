@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Source a configuration file that includes a directory to be backup and the ip address of the backup-server
+source /opt/backup/backup.conf
+
+# -a = Archive, -v = Verbose, -r = Recursive (recurse into directories)
+rsync -avr ${backupDir} backupserver@${ip}:/home/backupserver/BackupDir -e "ssh -i /home/serverone/.ssh/backup_key -o StrictHostKeyChecking=no"
