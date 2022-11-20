@@ -6,7 +6,7 @@
 
 ---
 
-#### Steps to Create a Remote Server 
+## Steps to Create a Remote Server 
 1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
 
 2. Add a new SSH key in **DigitalOcean**: <br/>
@@ -33,7 +33,7 @@ Select an existing project OR Create a **New Project** <br/>
 -> `sudo systemctl restart ssh` <br/>
 -> `sudo apt update && sudo apt upgrade`
 
-##### For Backup Section 
+### For Backup Section 
 6. As the server-one user, repeat step 1 to 4 for backup-server.<br/>
 After a public/private key pair is created for the backup-server, <br/>
 use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
@@ -108,7 +108,7 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 ![mv_backup_script](./images-directory/4mv_backup_script.jpg)
 
 #### Unit Files 
-1. Save *backup-service.service* and *backup-timer.timer* unit files to **/etc/systemd/system/** 
+1. Save *backup-service.service* and *backup-timer.timer* unit files to **/etc/systemd/system/**
 
 **Example**
 ![mv_unit_files](./images-directory/5mv_unit_files.jpg)
