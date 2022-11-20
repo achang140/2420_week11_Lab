@@ -17,10 +17,12 @@ Click **Settings** -> Click **Security** -> Click **Add SSH Key** <br/>
 3. Create a new remote server in **DigitalOcean**: <br/>
 Select an existing project OR Create a **New Project** -> Click **Create** -> Click **Droplets** 
 
-4. Create a regular user account: <br/>
-In **wsl**, `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
--> `useradd -ms /bin/bash USER_NAME` -> `usermod -aG sudo USER_NAME` -> `passwd USER_NAME` <br/>
--> `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
+4. Create a regular user account: In **wsl** 
+* `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS`
+* `useradd -ms /bin/bash USER_NAME` 
+* `usermod -aG sudo USER_NAME` 
+* `passwd USER_NAME`
+* `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
 
 5. Login as regular user: </br>
 `ssh -i ~/.ssh/FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` <br/>
