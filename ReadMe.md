@@ -162,7 +162,7 @@ WantedBy=timers.target
 3. `sudo systemctl status backup-timer.timer`
 
 **Example**
-![backup_timer](./images-directory/backup-timer.jpg)
+![backup_timer](./images-directory/6backup-timer.jpg)
 
 ---
 
