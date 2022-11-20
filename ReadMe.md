@@ -65,19 +65,49 @@ The *backup-script* `source` the *backup.conf* configuration file and uses `rsyn
 - The `-e` option is the private key of the backup-server 
 
 **Example**
-![backup-script](./images-directory/backup-script.jpg)
+<!-- ![backup-script](./images-directory/backup-script.jpg) -->
+```
+#!/bin/bash
+
+source /opt/backup/backup.conf
+rsync -avr ${backupDir} backupserver@${ip}:/home/backupserver/BackupDir -e "ssh -i /home/serverone/.ssh/backup_key -o StrictHostKeyChecking=no"
+```
 
 #### Unit File: backup-service.service 
 The *backup-service.service* unit file specifies location of the *backup-script* and execute the script to backup files from server-one to the backup-server.  
 
 **Example**
-![backup-service](./images-directory/backup-service.jpg)
+<!-- ![backup-service](./images-directory/backup-service.jpg) -->
+```
+[Unit]
+Description=Backup files from server-one to the backup-server using rsync 
+
+[Service]
+Type=oneshot
+ExecStart=/opt/backup/backup-script
+
+[Install]
+WantedBy=multi-user.target
+```
 
 #### Unit File: backup-timer.timer 
 The *backup-timer.timer* unit file sets backup service to start on every Friday at 01:00. 
 
 **Example**
-![backup-timer](./images-directory/backup-timer.jpg)
+<!-- ![backup-timer](./images-directory/backup-timer.jpg) -->
+```
+[Unit]
+Description=Timer to start the backup service on every Friday at 01:00  
+
+[Timer]
+OnCalendar=Fri *-*-* 01:00:00
+RandomizedDelaySec=10000
+Persistent=true
+Unit=backup-service.service
+
+[Install]
+WantedBy=timers.target
+```
 
 ### Step 2: Use `sftp` to Transfer Files to Remote Server  
 1. In **wsl**, run `sftp -i .ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` command. 
@@ -147,19 +177,46 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 The *wthr* script uses `curl` and `wttn.in` command to display Vancouver's weather. 
 
 **Example** <br/>
-![wthr](./images-directory/wthr.jpg)
+<!-- ![wthr](./images-directory/wthr.jpg) -->
+```
+#!/bin/bash 
+
+curl -s wttr.in/Vancouver -o /etc/motd 
+```
 
 #### Unit File: wthr.service 
 The *wthr.service* unit file specifies location of the *wthr* and execute the script to get Vancouver's weather everyday at 05:00. 
 
 **Example** <br/>
-![wthr.service](./images-directory/wthr-service.jpg)
+<!-- ![wthr.service](./images-directory/wthr-service.jpg) -->
+```
+[Unit]
+Description=use curl and wthr to get the weather everyday at 05:00 
+
+[Service] 
+Type=oneshot 
+ExecStart=/opt/wthr/wthr
+
+[Install]
+WantedBy=multi-user.target 
+```
 
 #### Unit File: wthr.timer
 The *wthr.timer* unit file sets wthr service to start on everyday at 05:00.
 
 **Example** <br/>
-![wthr.timer](./images-directory/wthr-timer.jpg)
+<!-- ![wthr.timer](./images-directory/wthr-timer.jpg) -->
+```
+[Unit]
+Description=Timer to start the wthr service which gets the weather everyday at 05:00
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
 
 ### Step 2: Use `sftp` to Transfer Files to Remote Server 
 1. In **wsl**, run `sftp -i .ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` command. 
