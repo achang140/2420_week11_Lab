@@ -4,7 +4,7 @@
 * **Amanda Chang** A01294905 
 * **Jose Bangate** 
 
-
+---
 
 #### Steps to Create a Remote Server 
 1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
@@ -35,7 +35,8 @@ Select an existing project OR Create a **New Project** <br/>
 
 ##### For Backup Section 
 6. As the server-one user, repeat step 1 to 4 for backup-server.<br/>
-After a public/private key pair is created for the backup-server, use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
+After a public/private key pair is created for the backup-server, <br/>
+use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
 
 ---
 
@@ -145,19 +146,19 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 #### wthr 
 The *wthr* script uses `curl` and `wttn.in` command to display Vancouver's weather. 
 
-**Example**
+**Example** <br/>
 ![wthr](./images-directory/wthr.jpg)
 
 #### Unit File: wthr.service 
 The *wthr.service* unit file specifies location of the *wthr* and execute the script to get Vancouver's weather everyday at 05:00. 
 
-**Example**
+**Example** <br/>
 ![wthr.service](./images-directory/wthr-service.jpg)
 
 #### Unit File: wthr.timer
 The *wthr.timer* unit file sets wthr service to start on everyday at 05:00.
 
-**Example**
+**Example** <br/>
 ![wthr.timer](./images-directory/wthr-timer.jpg)
 
 ### Step 2: Use `sftp` to Transfer Files to Remote Server 
