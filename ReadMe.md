@@ -46,7 +46,7 @@ use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to aut
 * server-one 
 * backup-server 
 
-### Development Environment (wsl) - Write Scripts and Unit Files 
+### Step 1: Development Environment (wsl) - Write Scripts and Unit Files 
 * backup-script 
 * backup.conf 
 * backup-service.service 
@@ -116,7 +116,7 @@ WantedBy=timers.target
 **Example**
 ![wsl_sftp](./images-directory/1wsl_sftp.jpg)
 
-### Step 3: Switch to Ubuntu (Servers)
+### Step 3: Switch to Ubuntu (Server)
 * Log in server-one by `ssh -i ~/.ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS`.
 
 ### Step 4: Set the Time Zone in Ubuntu 
