@@ -45,7 +45,7 @@ The *backup.conf* configuration file includes two variables:
 - a directory to be backup 
 - an IP address of the backup-server 
 
-**Example**
+**Example**<br/>
 ![backup-conf](./images-directory/backup-conf.jpg)
 
 #### backup-script 
