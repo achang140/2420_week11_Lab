@@ -7,7 +7,7 @@
 ---
 
 ## Steps to Create a Remote Server in DigitalOcean 
-1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
+1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the **.ssh** folder. 
 
 2. Add a new SSH key in **DigitalOcean**: <br/>
 **Settings** -> **Security** -> **Add SSH Key** <br/>
