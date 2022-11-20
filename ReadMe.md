@@ -15,18 +15,22 @@ Click **Settings** -> Click **Security** -> Click **Add SSH Key** <br/>
 -> input a SSH key name into **Name** box -> Click **Add SSH Key**  
 
 3. Create a new remote server in **DigitalOcean**: <br/>
-Select an existing project OR Create a **New Project** -> Click **Create** -> Click **Droplets** 
+Select an existing project OR Create a **New Project** <br/>
+-> Click **Create** <br/>
+-> Click **Droplets** <br/>
 
 4. Create a regular user account: In **wsl** <br/>
-i.      `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
-ii.     `useradd -ms /bin/bash USER_NAME` <br/>
-iii.    `usermod -aG sudo USER_NAME` <br/>
-iv.     `passwd USER_NAME` <br/>
-v.      `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
+-> `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
+-> `useradd -ms /bin/bash USER_NAME` <br/>
+-> `usermod -aG sudo USER_NAME` <br/>
+-> `passwd USER_NAME` <br/>
+-> `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
+
 
 5. Login as regular user: </br>
 `ssh -i ~/.ssh/FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` <br/>
--> `sudo vi /etc/ssh/sshd_config` -> `sudo systemctl restart ssh` <br/>
+-> `sudo vi /etc/ssh/sshd_config` <br/>
+-> `sudo systemctl restart ssh` <br/>
 -> `sudo apt update && sudo apt upgrade`
 
 ##### For Backup Section 
