@@ -36,7 +36,7 @@ Select an existing project OR Create a **New Project** <br/>
 ### For Backup Section 
 6. As the server-one user, repeat step 1 to 4 for backup-server.<br/>
 After a public/private key pair is created for the backup-server, <br/>
-use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
+use `cat KEY_FILE_NAME.pub >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
 
 ---
 
@@ -57,12 +57,17 @@ The *backup.conf* configuration file includes two variables:
 - a directory to be backup 
 - an IP address of the backup-server 
 
+```Shell
+backupDir=<Path of the Directory to be Backup>
+ip=<IP Address of the Backup Server>
+```
+
 **Example**<br/>
 ![backup-conf](./images-directory/backup-conf.jpg)
 
 #### backup-script 
 The *backup-script* `source` the *backup.conf* configuration file and uses `rsync` command to backup a specified directory from server-one to the backup-server on every Friday at 01:00. 
-- The `-e` option is the private key of the backup-server 
+- The `-e` option contains the private key of the backup-server 
 
 **Example**
 <!-- ![backup-script](./images-directory/backup-script.jpg) -->
@@ -132,7 +137,7 @@ WantedBy=timers.target
 #### Script 
 1. Create a new directory in **/opt** by `sudo mkdir /opt/NEW_DIR`.
 2. Save the *backup-script* to the **/opt/NEW_DIR** by `sudo mv backup-script /opt/NEW_DIR`.
-3. Depends on where you specified your backup.conf will be in *backup-script*, `sudo mv backup.conf [Specified Location]`. 
+3. Depends on where you specified your backup.conf will be in *backup-script*, `sudo mv backup.conf <Specified Location>`. 
 
 **Example**
 ![mv_backup_script](./images-directory/4mv_backup_script.jpg)
