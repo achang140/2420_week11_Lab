@@ -13,19 +13,31 @@
 #### Steps to Create a Remote Server (Example for server-one) 
 1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
 
-2. Add a new SSH key in **DigitalOcean**: Click **Settings** -> Click **Security** -> Click **Add SSH Key** -> Copy and paste the public key from the .pub file in the .ssh folder into **SSH key content** box -> input a SSH key name into **Name** box -> Click **Add SSH Key**  
+2. Add a new SSH key in **DigitalOcean**: <br/>
+Click **Settings** -> Click **Security** -> Click **Add SSH Key** <br/>
+-> Copy and paste the public key from the .pub file in the .ssh folder into **SSH key content** box <br/>
+-> input a SSH key name into **Name** box -> Click **Add SSH Key**  
 
-3. Create a new remote server in **DigitalOcean**: Select an existing project OR Create a **New Project** -> Click **Create** -> Click **Droplets** 
+3. Create a new remote server in **DigitalOcean**: <br/>
+Select an existing project OR Create a **New Project** -> Click **Create** -> Click **Droplets** 
 
-4. Create a regular user: In **wsl**, `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` -> 
+4. Create a regular user account: <br/>
+In **wsl**, `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
+-> `useradd -ms /bin/bash USER_NAME` -> `usermod -aG sudo USER_NAME` -> `passwd USER_NAME` <br/>
+-> `rsync --archive --chown=USER_NAME:USER_NAME ~/.ssh /home/USER_NAME` 
 
-5. Log in as server-one user, repeat step 1 to 4 for backup-server.<br/>
+5. Login as regular user: </br>
+`ssh -i ~/.ssh/FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` <br/>
+-> `sudo vi /etc/ssh/sshd_config` -> `sudo systemctl restart ssh` <br/>
+-> `sudo apt update && sudo apt upgrade`
+
+6. As the server-one user, repeat step 1 to 4 for backup-server.<br/>
 After a public/private key pair is created for the backup-server, use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
 
 ### Development Environment (wsl) - Write Scripts and Unit Files 
 * backup-script 
 * backup.conf 
-* backup-service.service *** Have location of where your backup-script will be located 
+* backup-service.service 
 * backup-timer.timer 
 
 ### backup.conf 
@@ -43,7 +55,7 @@ The *backup-script* source the *backup.conf* configuration file and use `rsync` 
 ![backup-script](./images-directory/backup-script.jpg)
 
 #### Unit File: backup-service.service 
-The *backup-service.service* unit file executes the *backup-script* to backup files from server-one to the backup-server.  
+The *backup-service.service* unit file specified location of the *backup-script* and execute the script to backup files from server-one to the backup-server.  
 
 **Example**
 ![backup-service](./images-directory/backup-service.jpg)
@@ -104,4 +116,21 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 1. `sudo systemctl enable TIMER_FILE_NAME.timer`
 2. `sudo systemctl start TIMER_FILE_NAME.timer`
 3. `sudo systemctl status TIMER_FILE_NAME.timer`
+
+**Example**
 ![backup_timer](./images-directory/backup-timer.jpg)
+
+## Weather 
+
+### DigitalOcean Server 
+* 2420-Labs 
+
+### Development Environment (wsl) - Write Scripts and Unit Files 
+* wthr 
+* wthr.service 
+* wthr.timer 
+
+### wthr 
+The *wthr* script 
+
+
