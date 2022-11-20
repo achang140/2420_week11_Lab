@@ -34,7 +34,7 @@ The *backup.conf* configuration file includes two variables:
 - an IP address of the backup-server 
 
 **Example**
-[<img src="https://github.com/achang140/2420_week11_Lab/blob/main/images-directory/1wsl_sftp.jpg" width="50" height="50"/>](./images-directory/backup-conf.jpg)
+[<img src="https://github.com/achang140/2420_week11_Lab/blob/main/images-directory/1wsl_sftp.jpg" width="500" height="500"/>](./images-directory/backup-conf.jpg)
 <!-- ![backup-conf](./images-directory/backup-conf.jpg) -->
 
 #### backup-script 
