@@ -58,6 +58,7 @@ The *backup.conf* configuration file includes two variables:
 - an IP address of the backup-server 
 
 ```Shell
+# Create a configuration file with the following content: 
 backupDir=<Path of the Directory to be Backup>
 ip=<IP Address of the Backup Server>
 ```
