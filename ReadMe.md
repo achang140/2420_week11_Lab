@@ -66,7 +66,7 @@ The *backup-script* `source` the *backup.conf* configuration file and uses `rsyn
 
 **Example**
 <!-- ![backup-script](./images-directory/backup-script.jpg) -->
-```
+```Shell
 #!/bin/bash
 
 source /opt/backup/backup.conf
@@ -78,7 +78,7 @@ The *backup-service.service* unit file specifies location of the *backup-script*
 
 **Example**
 <!-- ![backup-service](./images-directory/backup-service.jpg) -->
-```
+```Shell
 [Unit]
 Description=Backup files from server-one to the backup-server using rsync 
 
@@ -95,7 +95,7 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 
 **Example**
 <!-- ![backup-timer](./images-directory/backup-timer.jpg) -->
-```
+```Shell
 [Unit]
 Description=Timer to start the backup service on every Friday at 01:00  
 
@@ -178,7 +178,7 @@ The *wthr* script uses `curl` and `wttn.in` command to display Vancouver's weath
 
 **Example**
 <!-- ![wthr](./images-directory/wthr.jpg) -->
-```
+```Shell
 #!/bin/bash 
 
 curl -s wttr.in/Vancouver -o /etc/motd 
@@ -189,7 +189,7 @@ The *wthr.service* unit file specifies location of the *wthr* and execute the sc
 
 **Example**
 <!-- ![wthr.service](./images-directory/wthr-service.jpg) -->
-```
+```Shell
 [Unit]
 Description=use curl and wthr to get the weather everyday at 05:00 
 
@@ -206,7 +206,7 @@ The *wthr.timer* unit file sets wthr service to start on everyday at 05:00.
 
 **Example**
 <!-- ![wthr.timer](./images-directory/wthr-timer.jpg) -->
-```
+```Shell
 [Unit]
 Description=Timer to start the wthr service which gets the weather everyday at 05:00
 
