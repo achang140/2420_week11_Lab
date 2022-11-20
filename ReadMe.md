@@ -4,13 +4,9 @@
 * **Amanda Chang** A01294905 
 * **Jose Bangate** 
 
-## Backup 
 
-### Created 2 new servers on DigitalOcean 
-* server-one 
-* backup-server 
 
-#### Steps to Create a Remote Server (Example for server-one) 
+#### Steps to Create a Remote Server 
 1. In **wsl**, Use `ssh-keygen -t ed25519 -C "OPTIONAL_COMMENT"` to generate a public/private key pair. Save it to a new file in the .ssh folder. 
 
 2. Add a new SSH key in **DigitalOcean**: <br/>
@@ -31,8 +27,17 @@ In **wsl**, `ssh -i ~/.ssh/KEYFILE_NAME root@DIGITALOCEAN_IP_ADDRESS` <br/>
 -> `sudo vi /etc/ssh/sshd_config` -> `sudo systemctl restart ssh` <br/>
 -> `sudo apt update && sudo apt upgrade`
 
+##### For Backup Section 
 6. As the server-one user, repeat step 1 to 4 for backup-server.<br/>
 After a public/private key pair is created for the backup-server, use `cat [KEY_FILE_NAME.pub] >> authorized_keys` to append the public key to authorized_keys file in **.ssh**.
+
+---
+
+##  Backup 
+
+### Created 2 new servers on DigitalOcean 
+* server-one 
+* backup-server 
 
 ### Development Environment (wsl) - Write Scripts and Unit Files 
 * backup-script 
@@ -40,7 +45,7 @@ After a public/private key pair is created for the backup-server, use `cat [KEY_
 * backup-service.service 
 * backup-timer.timer 
 
-### backup.conf 
+#### backup.conf 
 The *backup.conf* configuration file includes two variables: 
 - a directory to be backup 
 - an IP address of the backup-server 
@@ -49,13 +54,14 @@ The *backup.conf* configuration file includes two variables:
 ![backup-conf](./images-directory/backup-conf.jpg)
 
 #### backup-script 
-The *backup-script* source the *backup.conf* configuration file and use `rsync` command to backup a specified directory from server-one to the backup-server on every Friday at 01:00. 
+The *backup-script* `source` the *backup.conf* configuration file and uses `rsync` command to backup a specified directory from server-one to the backup-server on every Friday at 01:00. 
+- The `-e` option is the private key of the backup-server 
 
 **Example**
 ![backup-script](./images-directory/backup-script.jpg)
 
 #### Unit File: backup-service.service 
-The *backup-service.service* unit file specified location of the *backup-script* and execute the script to backup files from server-one to the backup-server.  
+The *backup-service.service* unit file specifies location of the *backup-script* and execute the script to backup files from server-one to the backup-server.  
 
 **Example**
 ![backup-service](./images-directory/backup-service.jpg)
@@ -66,18 +72,17 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 **Example**
 ![backup-timer](./images-directory/backup-timer.jpg)
 
-
-### Use `sftp` to Transfer Files to Remote Server 
+### Step 2: Use `sftp` to Transfer Files to Remote Server  
 1. In **wsl**, run `sftp -i .ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` command. 
 2. Use `put -r FOLDER_NAME` to transfer all the files in a directory or `put FILE_NAME` to transfer a file. 
 
 **Example**
 ![wsl_sftp](./images-directory/1wsl_sftp.jpg)
 
-### Switch to Ubuntu (Servers)
+### Step 3: Switch to Ubuntu (Servers)
 * Log in server-one by `ssh -i ~/.ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS`.
 
-### Set the Time Zone in Ubuntu 
+### Step 4: Set the Time Zone in Ubuntu 
 * `timedatectl status` displays the current time zone 
 * `timedatectl list-timezones` displays a list of available time zones 
 * `sudo timedatectl set-timezone America/Vancouver` sets the time zone to America/Vancouver 
@@ -85,7 +90,7 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 **Example**
 ![timedatectl](./images-directory/3timedatectl.jpg)
 
-### Locations to Store Script and Unit Files 
+### Step 5. Locations to Store Script and Unit Files 
 
 #### Script 
 1. Create a new directory in **/opt** by `sudo mkdir /opt/NEW_DIR`.
@@ -101,36 +106,78 @@ The *backup-timer.timer* unit file sets backup service to start on every Friday 
 **Example**
 ![mv_unit_files](./images-directory/5mv_unit_files.jpg)
 
-
 ### Use `systemctl` to Manage Unit Files 
 
 #### Service File 
-1. `sudo systemctl enable SERVICE_FILE_NAME.service`
-2. `sudo systemctl start SERVICE_FILE_NAME.service`
-3. `sudo systemctl status SERVICE_FILE_NAME.service`
+1. `sudo systemctl enable backup-service.service`
+2. `sudo systemctl start backup-service.service`
+3. `sudo systemctl status backup-service.service`
 
 **Example**
 ![backup_service](./images-directory/6backup-service.jpg)
 
 #### Timer File 
-1. `sudo systemctl enable TIMER_FILE_NAME.timer`
-2. `sudo systemctl start TIMER_FILE_NAME.timer`
-3. `sudo systemctl status TIMER_FILE_NAME.timer`
+1. `sudo systemctl enable backup-timer.timer`
+2. `sudo systemctl start backup-timer.timer`
+3. `sudo systemctl status backup-timer.timer`
 
 **Example**
 ![backup_timer](./images-directory/backup-timer.jpg)
+
+---
 
 ## Weather 
 
 ### DigitalOcean Server 
 * 2420-Labs 
 
-### Development Environment (wsl) - Write Scripts and Unit Files 
+### Step 1: Development Environment (wsl) - Write Scripts and Unit Files 
 * wthr 
 * wthr.service 
 * wthr.timer 
 
-### wthr 
-The *wthr* script 
+#### wthr 
+The *wthr* script uses `curl` and `wttn.in` command to display Vancouver's weather. 
 
+**Example**
+![wthr](./images-directory/wthr.jpg)
 
+#### Unit File: wthr.service 
+The *wthr.service* unit file specifies location of the *wthr* and execute the script to get Vancouver's weather everyday at 05:00. 
+
+**Example**
+![wthr.service](./images-directory/wthr-service.jpg)
+
+#### Unit File: wthr.timer
+The *wthr.timer* unit file sets wthr service to start on everyday at 05:00.
+
+**Example**
+![wthr.timer](./images-directory/wthr-timer.jpg)
+
+### Step 2: Use `sftp` to Transfer Files to Remote Server 
+1. In **wsl**, run `sftp -i .ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS` command. 
+2. Use `put -r FOLDER_NAME` to transfer all the files in a directory or `put FILE_NAME` to transfer a file. 
+
+### Step 3: Switch to Ubuntu (Servers)
+* Log in 2420-Lab server by `ssh -i ~/.ssh/KEY_FILE_NAME USER_NAME@DIGITALOCEAN_IP_ADDRESS`.
+
+### Step 4. Locations to Store Script and Unit Files 
+
+#### Script 
+1. Create a new directory in **/opt** by `sudo mkdir /opt/NEW_DIR`.
+2. Save the *wthr* to the **/opt/NEW_DIR** by `sudo mv wthr /opt/NEW_DIR`.
+
+#### Unit Files 
+1. Save *wthr.service* and *wthr.timer* unit files to **/etc/systemd/system/** 
+
+### Step 5. Use `systemctl` to Manage Unit Files 
+
+#### Service File 
+1. `sudo systemctl enable wthr.service`
+2. `sudo systemctl start wthr.service`
+3. `sudo systemctl status wthr.service`
+
+#### Timer File 
+1. `sudo systemctl enable wthr.timer`
+2. `sudo systemctl start wthr.timer`
+3. `sudo systemctl status wthr.timer`
