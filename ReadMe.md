@@ -62,12 +62,9 @@ backupDir=<Path of the Directory to be Backup>
 ip=<IP Address of the Backup Server>
 ```
 
-**Example**<br/>
-![backup-conf](./images-directory/backup-conf.jpg)
-
 #### backup-script 
 The *backup-script* `source` the *backup.conf* configuration file and uses `rsync` command to backup a specified directory from server-one to the backup-server on every Friday at 01:00. 
-- The `-e` option contains the private key of the backup-server 
+- The `-e` option contains the absolute path of the (backup-server's) private key file in server-one's .ssh folder 
 
 **Example**
 <!-- ![backup-script](./images-directory/backup-script.jpg) -->
