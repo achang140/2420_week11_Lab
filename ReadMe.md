@@ -176,7 +176,7 @@ WantedBy=timers.target
 #### wthr 
 The *wthr* script uses `curl` and `wttn.in` command to display Vancouver's weather. 
 
-**Example** <br/>
+**Example**
 <!-- ![wthr](./images-directory/wthr.jpg) -->
 ```
 #!/bin/bash 
@@ -187,7 +187,7 @@ curl -s wttr.in/Vancouver -o /etc/motd
 #### Unit File: wthr.service 
 The *wthr.service* unit file specifies location of the *wthr* and execute the script to get Vancouver's weather everyday at 05:00. 
 
-**Example** <br/>
+**Example**
 <!-- ![wthr.service](./images-directory/wthr-service.jpg) -->
 ```
 [Unit]
@@ -204,7 +204,7 @@ WantedBy=multi-user.target
 #### Unit File: wthr.timer
 The *wthr.timer* unit file sets wthr service to start on everyday at 05:00.
 
-**Example** <br/>
+**Example**
 <!-- ![wthr.timer](./images-directory/wthr-timer.jpg) -->
 ```
 [Unit]
