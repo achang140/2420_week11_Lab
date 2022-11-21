@@ -104,7 +104,7 @@ Description=Timer to start the backup service on every Friday at 01:00
 
 [Timer]
 OnCalendar=Fri *-*-* 01:00:00
-RandomizedDelaySec=10000
+RandomizedDelaySec=3600
 Persistent=true
 Unit=backup-service.service
 
